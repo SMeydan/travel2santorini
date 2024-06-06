@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Santorini</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            width: 100%;
+            position: absolute;
+            top: 20px;
+            z-index: 1000;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+
+        header nav a:hover {
+            background: white;
+            color: #0077b6;
+        }
+
+        section {
+            padding: 50px 20px;
+        }
+
+        .location {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+        }
+
+        .location .location-item {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px 10px;
+            border-radius: 20px;
+        }
+
+        .location .location-item-inner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .location .location-item:hover .location-item-inner {
+            transform: rotateY(180deg);
+        }
+
+        .location .location-item-front,
+        .location .location-item-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+        }
+
+        .location .location-item-back {
+            background: #053780;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+
+        .location .location-item-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .location-item-back img {
+            width: 70%; 
+            height: auto;
+            margin: 0 auto; 
+            display: block; 
+        }
+        #explore .location-item:nth-child(odd) {
+            align-self: flex-start;
+            margin-left: 10%;
+        }
+
+        #explore .location-item:nth-child(even) {
+            align-self: flex-end;
+            margin-right: 10%;
+        }
+
+        .food {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .food .food-item {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px 10px;
+        }
+
+        .food .food-item-inner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .food .food-item:hover .food-item-inner {
+            transform: rotateY(180deg);
+        }
+
+        .food .food-item-front,
+        .food .food-item-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+        }
+
+        .food .food-item-back {
+            background: #053780;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .food .food-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        #home {
+            display: flex;
+            align-items: flex-end;
+            background: url('./1.svg') no-repeat center center/cover;
+            height: 1000px;
+            position: relative;
+        }
+
+        #home h1 {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            right: 50px;
+            bottom: 10px;
+            font-family: 'Caveat', cursive;
+            font-size: 200px;
+            color: #9C202F;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        #home h1:hover {
+            transform: scale(1.1);
+        }
+
+        .section-title {
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding-top: 20px;
+            font-family: 'Caveat', cursive;
+            font-size: 60px;
+            color: #9C202F;
+        }
+
+        #explore {
+            background: url('./2.svg') no-repeat center center/cover;
+            height: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 50px;
+        }
+
+        #footer {
+            background: url('./15.svg') no-repeat center center/cover;
+            height: 460px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #footer p {
+            color: white;
+            font-size: 18px;
+        }
+
+        #todo {
+            padding: 60px;
+            background: url('./19.svg') no-repeat center center/cover;
+            height: 650px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #todo h2 {
+            text-align: center;
+            margin-top: 10%;
+            padding: 0;
+            font-family: 'Caveat', cursive;
+            color: #9C202F;
+        }
+
+        #todo .todo-item {
+            display: flex;
+            margin-left: 25%;
+            margin-top: 20px;
+            width: 80%;
+        }
+
+        #todo .todo-item input {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 1400px) {
+            #todo h2 {
+                margin-top: 15%;
+            }
+        }
+
+        @media (max-width: 1050px) {
+            #todo .todo-item {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header nav a {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+
+            #home h1 {
+                font-size: 100px;
+                right: 20px;
+                bottom: 10px;
+            }
+
+            .location div,
+            .food div {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            #explore .location-item {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            #explore .location-item:nth-child(odd),
+            #explore .location-item:nth-child(even) {
+                align-self: center;
+                margin: 0;
+            }
+
+            .food div {
+                flex: 1 1 calc(100% - 20px);
+                /* 1 column with 10px gap */
+                max-width: calc(100% - 20px);
+            }
+
+            #todo .todo-item {
+                margin-left: 10%;
+                width: 80%;
+            }
+
+            #todo h2 {
+                text-align: center;
+                margin-top: 30%;
+                padding: 0;
+                font-family: 'Caveat', cursive;
+                color: #9C202F;
+            }
+        }
+
+        @media (max-width: 580px) {
+            #home h1 {
+                font-size: 70px;
+            }
+
+            .food div {
+                flex: 1 1 calc(100% - 20px);
+                /* 1 column with 10px gap */
+                max-width: calc(100% - 20px);
+            }
+
+            #todo h2 {
+                text-align: center;
+                margin-top: 35%;
+                padding: 0;
+                font-family: 'Caveat', cursive;
+                color: #9C202F;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #home h1 {
+                font-size: 70px;
+            }
+
+            .food div {
+                flex: 1 1 calc(100% - 20px);
+                /* 1 column with 10px gap */
+                max-width: calc(100% - 20px);
+            }
+
+            #todo h2 {
+                text-align: center;
+                margin-top: 40%;
+                padding: 0;
+                font-family: 'Caveat', cursive;
+                color: #9C202F;
+            }
+        }
+
+        @media (max-width: 400px) {
+            #home h1 {
+                font-size: 70px;
+            }
+
+            .food div {
+                flex: 1 1 calc(100% - 20px);
+                /* 1 column with 10px gap */
+                max-width: calc(100% - 20px);
+            }
+
+            #todo h2 {
+                text-align: center;
+                margin-top: 50%;
+                padding: 0;
+                font-family: 'Caveat', cursive;
+                color: #9C202F;
+            }
+        }
+
+        @media (max-width: 360px) {
+            #todo {
+                background: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="home">
+        <header>
+            <nav>
+                <a href="#explore">Explore</a>
+                <a href="#food">Foods</a>
+                <a href="#todo">To-do List</a>
+            </nav>
+        </header>
+        <h1>Santorini</h1>
+    </section>
+    <section id="explore" class="location">
+        <h2 class="section-title">Explore</h2>
+        <p style="font-family:'Caveat', cursive;">Just Hover Over the Cards</p>
+        <div class="location-item">
+            <div class="location-item-inner">
+                <div class="location-item-front">
+                    <img src="./3.svg" alt="Oia">
+                </div>
+                <div class="location-item-back">
+                    <img src="./3-real.jpg" alt="Oia Real">
+                    <p style="font-family:'Caveat', cursive;color: white;">Oia, also known as Pano Meria, is considered the most picturesque village of Santorini and holds the position of the most visited spot for sunset viewing, as it provides an excellent view of the well-known sunset, probably the most famous sunset in the world.</p>
+                    <a href="https://www.getyourguide.co.uk/-l9790/?cmp=ga&cq_src=google_ads&cq_cmp=15508202359&cq_con=130580285733&cq_term=oia+santorini&cq_med=&cq_plac=&cq_net=g&cq_pos=&cq_plt=gp&campaign_id=15508202359&adgroup_id=130580285733&target_id=kwd-90652345&loc_physical_ms=1012786&match_type=e&ad_id=618179243664&keyword=oia+santorini&ad_position=&feed_item_id=&placement=&device=c&partner_id=CD951&gad_source=1&gclid=CjwKCAjwvIWzBhAlEiwAHHWgvdMUH8D4uSyubHEEX5kM1G8jOWpxKrSB56Rmtx8pU_JFQXoP-2GcnxoC6e0QAvD_BwE&visitor-id=98GPVKLPF4TDHJY03LYUGHPD1ZU066M5&locale_autoredirect_optout=true" style="color: white;">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="location-item">
+            <div class="location-item-inner">
+                <div class="location-item-front">
+                    <img src="./4.svg" alt="Fia">
+                </div>
+                <div class="location-item-back">
+                    <img src="./4-real.jpg" alt="Fira Real">
+                    <p style="font-family:'Caveat', cursive;color: white;">Fira is not only beautiful and filled with cultural landmarks, as it’s also a hub of activity on the island. Fira is where you’ll find most of Santorini’s best shopping, dining, nightlife and art. </p>
+                    <a href="https://tr.hotels.com/go/greece/best-things-to-do-fira?locale=tr_TR&pos=HCOM_TR&siteid=300000028" style="color: white;">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="location-item">
+            <div class="location-item-inner">
+                <div class="location-item-front">
+                    <img src="./5.svg" alt="Fira">
+                </div>
+                <div class="location-item-back">
+                    <img src="./5-real.jpg" alt="Fira Real">
+                    <p style="font-family:'Caveat', cursive;color: white;">Fira is the capital of Santorini. On the caldera side you get one of the best views of the island and the activity level is enough to keep you entertained for hours. There are cafes, bars, restaurants.</p>                  
+                    <a href="https://www.greektravel.com/greekislands/santorini/fira/" style="color: white;">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="location-item">
+            <div class="location-item-inner">
+                <div class="location-item-front">
+                    <img src="./6.svg" alt="Kamari Beach">
+                </div>
+                <div class="location-item-back">
+                    <img src="./6-real.jpg" alt="Kamari Beach Real">
+                    <p style="font-family:'Caveat', cursive;color: white;">This gorgeous black-sand beach is located on the southeast of Santorini, right at the foot of Mesa Vuono Mountain. It's a great place to sunbathe and swim—it's been awarded the Blue Flag for its clean and clear waters after all. </p>
+                    <a href="https://www.kamaribeach.gr/" style="color: white;">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="location-item">
+            <div class="location-item-inner">
+                <div class="location-item-front">
+                    <img src="./8.svg" alt="Pyrgos">
+                </div>
+                <div class="location-item-back">
+                    <img src="./8-real.jpg" alt="Pyrgos Real">
+                    <p style="font-family:'Caveat', cursive;color: white;">Pyrgos is a city in the northwestern Peloponnese, Greece, capital of the regional unit of Elis and the seat of the Municipality of Pyrgos. The city is located in the middle of a plain, 4 kilometres (2 miles) from the Ionian Sea. </p>
+                    <a href="https://www.alongdustyroads.com/posts/things-to-do-in-pyrgos-santorini" style="color: white;">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="food" class="food">
+        <h2 class="section-title">Foods</h2>
+        <div class="food-item">
+            <div class="food-item-inner">
+                <div class="food-item-front">
+                    <img src="./9.svg" alt="Mousakka">
+                </div>
+                <div class="food-item-back">
+                    <img src="./9-real.jpeg" alt="Mousakka Real">
+                    <a href="https://www.opentable.com/r/rocca-nera-imerovigli?corrid=b97cefef-0b67-4930-90c4-8d85b823c425&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2024-06-06T19%3A00%3A00" style="color: white;">Restaurants</a>
+                </div>
+            </div>
+        </div>
+        <div class="food-item">
+            <div class="food-item-inner">
+                <div class="food-item-front">
+                    <img src="./10.svg" alt="Greek Salad">
+                </div>
+                <div class="food-item-back">
+                    <img src="./10-real.jpeg" alt="Greek Salad Real">
+                    <a href="https://www.opentable.com/r/varoulko-santorini?corrid=b97cefef-0b67-4930-90c4-8d85b823c425&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2024-06-06T19%3A00%3A00" style="color: white;">Restaurants</a>
+                </div>
+            </div>
+        </div>
+        <div class="food-item">
+            <div class="food-item-inner">
+                <div class="food-item-front">
+                    <img src="./11.svg" alt="Baklava">
+                </div>
+                <div class="food-item-back">
+                    <img src="./11-real.jpeg" alt="Baklava Real">
+                    <a href="https://www.opentable.com/r/mavro-santorini-imerovigli?corrid=b97cefef-0b67-4930-90c4-8d85b823c425&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2024-06-06T19%3A00%3A00" style="color: white;">Restaurants</a>
+                </div>
+            </div>
+        </div>
+        <div class="food-item">
+            <div class="food-item-inner">
+                <div class="food-item-front">
+                    <img src="./12.svg" alt="Spanakopita">
+                </div>
+                <div class="food-item-back">
+                    <img src="./12-real.jpeg" alt="Spanakopita Real">
+                    <a href="https://www.opentable.com/r/chroma-imerovigli?corrid=b97cefef-0b67-4930-90c4-8d85b823c425&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2024-06-06T19%3A00%3A00" style="color: white;">Restaurants</a>
+                </div>
+            </div>
+        </div>
+        <div class="food-item">
+            <div class="food-item-inner">
+                <div class="food-item-front">
+                    <img src="./13.svg" alt="Souvlaki">
+                </div>
+                <div class="food-item-back">
+                    <img src="./13-real.jpg" alt="Souvlaki Real">
+                    <a href="https://www.opentable.com/r/rare-meat-restaurant-thira?corrid=b97cefef-0b67-4930-90c4-8d85b823c425&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2024-06-06T19%3A00%3A00" style="color: white;">Restaurants</a>
+                </div>
+            </div>
+        </div>
+        <div class="food-item">
+            <div class="food-item-inner">
+                <div class="food-item-front">
+                    <img src="./14.svg" alt="Dolmades">
+                </div>
+                <div class="food-item-back">
+                    <img src="./14-real.jpeg" alt="Dolmades Real">
+                    <a href="https://www.opentable.com/r/throubi-restaurant-imerovigli-5?corrid=b97cefef-0b67-4930-90c4-8d85b823c425&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2024-06-06T19%3A00%3A00" style="color: white;">Restaurants</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="todo">
+        <h2 class="section-title">Things to Do</h2>
+        <div class="todo-item">
+            <input type="checkbox" id="wine-tasting"><i class="fas fa-wine-glass"></i>
+            <label for="wine-tasting"> Wine Tasting: Visit a local winery and taste the famous wines of
+                Santorini.</label>
+        </div>
+        <div class="todo-item">
+            <input type="checkbox" id="boat-tour"><i class="fas fa-ship"></i>
+            <label for="boat-tour"> Boat Tour: Explore the island by boat and discover hidden beaches and caves.</label>
+        </div>
+        <div class="todo-item">
+            <input type="checkbox" id="hiking"><i class="fas fa-hiking"></i>
+            <label for="hiking"> Hiking: Take a hike along the caldera cliffs and enjoy the breathtaking views.</label>
+        </div>
+        <div class="todo-item">
+            <input type="checkbox" id="sunset"><i class="fa-solid fa-sun"></i>
+            <label for="sunset"> Sunset: Watch the famous Santorini sunset from Oia or Fira.</label>
+        </div>
+    </section>
+    <section id="footer"></section>
+</body>
+
+</html>
