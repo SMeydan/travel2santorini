@@ -10,7 +10,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
         
-        body {
+            body {
+            margin: 0 !important;
+            padding: 0 !important;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -45,10 +47,6 @@
         header nav a:hover {
             background: white;
             color: #0077b6;
-        }
-
-        section {
-            padding: 50px 20px;
         }
 
         .location {
@@ -178,8 +176,9 @@
         #home {
             display: flex;
             align-items: flex-end;
-            background: url('./1.png') no-repeat center center/cover;
-            height: 1000px;
+            background: url('./1.png') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
             position: relative;
         }
 
