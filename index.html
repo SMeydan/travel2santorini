@@ -272,6 +272,9 @@
                 width: 90%;
             }
         }
+        @media (max-width: 768px) {
+        
+        }
 
         @media (max-width: 768px) {
             header nav a {
@@ -285,8 +288,7 @@
                 bottom: 10px;
             }
 
-            .location div,
-            .food div {
+            .location div{
                 width: 100%;
                 max-width: 100%;
             }
@@ -303,7 +305,7 @@
             }
 
             .food div {
-                flex: 1 1 calc(100% - 20px);
+                flex: 1 calc(100% - 20px);
                 /* 1 column with 10px gap */
                 max-width: calc(100% - 20px);
             }
@@ -321,6 +323,7 @@
                 color: #9C202F;
             }
         }
+
 
         @media (max-width: 580px) {
             #home h1 {
@@ -380,6 +383,18 @@
                 font-family: 'Caveat', cursive;
                 color: #9C202F;
             }
+            #todo {
+                background: url('./19.png') no-repeat center center/cover;
+                background-size: 500%;
+            }
+        }
+        @media (max-width: 390px){
+            #todo {
+                background: url('./19.png') no-repeat center center/cover;
+                background-size: 700%;
+            }
+        }
+        @media (max-width: 355px){
             #todo {
                 background: none;
             }
